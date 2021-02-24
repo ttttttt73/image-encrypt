@@ -6,6 +6,7 @@ function PostRequestEncryptHooks(props) {
     const [Ciphertext, setCiphertext] = useState(null);
     const [Ciphertext2, setCiphertext2] = useState(null);
 
+
     useEffect(() => {
         const requestOptions = {
             method: 'POST',
@@ -15,26 +16,27 @@ function PostRequestEncryptHooks(props) {
         };
         if (props.msg !== null) {
             fetch('/encrypt2', requestOptions).then(res => res.json()).then(
-                data => { 
+                data => {
                     setKey(data.send_res);
                     setIV(data.sign_res);
                     setCiphertext(data.ciphertext);
                     setCiphertext2(data.ciphertext2);
-                    props.setBlock({...props.block, [props.block.content]: data.send_res});
-                    props.setBlock({...props.block, [props.block.sign]: data.sign_res});
-                }).then(console.log(Ciphertext)); 
-            console.log(Ciphertext2);
-            console.log("block.content: ", props.block.content);
-            console.log("block.sign: ", props.block.sign);
-            console.log("send_res: ", Key)
-            setKey("Hi")
-            console.log("send_res: ", Key)
-            console.log('test');
+                    console.log(Ciphertext2);
+                    console.log("send_res: ", Key)
+                    // setKey("Set key test")
+                    console.log("send_res: ", Key)
+                    console.log('test');
+                }).then(
+                    props.setBlock({...props.block, [props.block.content]: Key}),
+                    props.setBlock({...props.block, [props.block.sign]: IV}),
+                    console.log("block.content: ", props.block.content),
+                    console.log("block.sign: ", props.block.sign),
+                    console.log("then:", Key)); 
         } else {
             console.log('buffer is null')
         }
-        
     }, [props.msg]);
+    
 
     return (
         <div className="card text-cetner m-3">

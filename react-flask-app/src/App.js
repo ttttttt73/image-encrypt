@@ -57,7 +57,8 @@ function App() {
   const retrieveFile = async () => {
     const { accounts, contract } = ethcontract;
     // const ipfsHash = await contract.methods.get().call();
-    //setIpfsHash(ipfsHash);
+    // setIpfsHash(ipfsHash);
+    console.log("Contract's get call: ", await contract.methods.get().call())
   }
 
   const onSubmit = async (event) => {
@@ -80,8 +81,8 @@ function App() {
       console.log(accounts[0]);
       console.log("block.content: ", block.content);
       console.log("block.sign: ", block.sign);
-      // await contract.methods.set(block.content, block.sign).send({ from: accounts[0] });
-      await contract.methods.set("test1", "test2").send({ from: accounts[0] });
+      await contract.methods.set(block.content, block.sign).send({ from: accounts[0] });
+      // await contract.methods.set("test1", "test2").send({ from: accounts[0] });
       // setIpfsHash(ipfsHash);
     } catch (error) {
       console.error(error);
@@ -147,6 +148,12 @@ function App() {
         </form>
         <img src={filebuffer} alt="receive image"/>
         <PostRequestEncryptHooks msg={filebuffer} block={block} setBlock={setBlock}/>
+        <button onClick={onSubmit}>
+          Contract send call
+        </button>
+        <button onClick={retrieveFile}>
+          Contract get call
+        </button>
         <form onSubmit={onSubmit_decrypt}>
           <h2>Decrytion</h2>
           <p>Enter your key:</p>
