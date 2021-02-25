@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 function PostRequestDecryptHooks(props) {
-    // const [Key, setKey] = useState(null);
-    // const [IV, setIV] = useState(null);
     const [Plaintext, setPlaintext] = useState(null);
 
     useEffect(() => {

@@ -9,27 +9,22 @@ import SimpleStorageContract from "./contracts/SimpleStorage.json";
 
 
 function App() {
+  var useStateRef = require('react-usestateref')
   const [placeholder, setPlaceholder] = useState('Hi');
   const [filebuffer, setBuffer] = useState(null);
-  const [Plaintext, setPlaintext] = useState(null);
   const [state, setState] = useState({
     send_file: "",
     sign_file: ""
   })
-  const [block, setBlock] = useState({
-    content: "",
-    sign: ""
-    //ciphertext: "",
-    //ciphertext2: ""
-  })
-  const [ipfsHash, setIpfsHash] = useState(null);
+  var [block_sign, setBlock, blockRef] = useStateRef(null)
+  var [block_content, setBlock2, blockRef2] = useStateRef(null)
   const [ethcontract, setEthContract] = useState({
     storageValue: 0,
     web3: null,
     accounts: null,
     contract: null
   })
-  const b64 = ""
+
   useEffect (() => {
     try {
       async function setContract() {
@@ -56,8 +51,6 @@ function App() {
 
   const retrieveFile = async () => {
     const { accounts, contract } = ethcontract;
-    // const ipfsHash = await contract.methods.get().call();
-    // setIpfsHash(ipfsHash);
     console.log("Contract's get call: ", await contract.methods.get().call())
   }
 
@@ -65,13 +58,6 @@ function App() {
     event.preventDefault();
     try {
       console.log('buffer is changed')
-      // console.log(filebuffer)
-      const b64 = new Buffer.from(filebuffer).toString("base64")
-      // console.log(b64)
-      const mimeType = 'image/png';
-      let results = await ipfs.add(filebuffer);
-      console.log("ipfs result: ", results)
-      let ipfsHash = results.path;
       console.log("ethcontract: ", ethcontract)
       const contract = ethcontract.contract;
       const accounts = ethcontract.accounts;
@@ -79,11 +65,10 @@ function App() {
       let tokens = web3.utils.toWei(amount.toString(), 'ether')
       let bntokens = web3.utils.toBN(tokens)*/
       console.log(accounts[0]);
-      console.log("block.content: ", block.content);
-      console.log("block.sign: ", block.sign);
-      await contract.methods.set(block.content, block.sign).send({ from: accounts[0] });
+      console.log("block.content: ", block_content);
+      console.log("block.sign: ", block_sign);
+      await contract.methods.set(block_content, block_sign).send({ from: accounts[0] });
       // await contract.methods.set("test1", "test2").send({ from: accounts[0] });
-      // setIpfsHash(ipfsHash);
     } catch (error) {
       console.error(error);
     }
@@ -147,7 +132,8 @@ function App() {
           <input type='submit'/>
         </form>
         <img src={filebuffer} alt="receive image"/>
-        <PostRequestEncryptHooks msg={filebuffer} block={block} setBlock={setBlock}/>
+        <PostRequestEncryptHooks msg={filebuffer} block_sign={block_sign} setBlock={setBlock} blockRef={blockRef}
+        block_content={block_content} setBlock2={setBlock2} blockRef2={blockRef2}/>
         <button onClick={onSubmit}>
           Contract send call
         </button>

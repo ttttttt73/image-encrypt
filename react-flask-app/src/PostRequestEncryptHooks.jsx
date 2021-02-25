@@ -6,7 +6,6 @@ function PostRequestEncryptHooks(props) {
     const [Ciphertext, setCiphertext] = useState(null);
     const [Ciphertext2, setCiphertext2] = useState(null);
 
-
     useEffect(() => {
         const requestOptions = {
             method: 'POST',
@@ -21,23 +20,16 @@ function PostRequestEncryptHooks(props) {
                     setIV(data.sign_res);
                     setCiphertext(data.ciphertext);
                     setCiphertext2(data.ciphertext2);
-                    console.log(Ciphertext2);
-                    console.log("send_res: ", Key)
-                    // setKey("Set key test")
-                    console.log("send_res: ", Key)
-                    console.log('test');
-                }).then(
-                    props.setBlock({...props.block, [props.block.content]: Key}),
-                    props.setBlock({...props.block, [props.block.sign]: IV}),
-                    console.log("block.content: ", props.block.content),
-                    console.log("block.sign: ", props.block.sign),
-                    console.log("then:", Key)); 
+                    props.setBlock2(data.sign_res)
+                    props.setBlock(data.send_res)
+                    console.log("block.content: ", props.blockRef2)
+                    console.log("block.sign: ", props.blockRef)
+                })   
         } else {
             console.log('buffer is null')
         }
     }, [props.msg]);
-    
-
+   
     return (
         <div className="card text-cetner m-3">
             <h5 className="card-header">Post Request Result - Encryption</h5>
