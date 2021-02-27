@@ -17,17 +17,21 @@ pip3 install ipfshttpclient
 encrypt.py  -i Halra.jpg -c 1 -s 24
 decrypt.py  -i sendfile.txt -o mountain_2.jpg -s signfile.txt -k yrprikey.pem
 
-## Installation
-
-git clone https://github.com/ttttttt73/image-encrypt-dapp.git
-
-pip install -r requirements.txt
-flask run
-
-truffle develop
-compile
-migrate --reset
-
-cd react-flask-app
-npm install
-npm start
+# Installation
+```
+git clone https://github.com/ttttttt73/image-encrypt-dapp.git  
+```
+```
+pip install -r requirements.txt  
+flask run  
+```
+```
+truffle develop  
+compile  
+migrate --reset  
+```
+```
+cd react-flask-app  
+npm install  
+npm start  
+```
