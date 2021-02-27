@@ -142,9 +142,9 @@ function App() {
         </button>
         <form onSubmit={onSubmit_decrypt}>
           <h2>Decrytion</h2>
-          <p>Enter your key:</p>
+          <p>Enter your content:</p>
           <input type='text' onChange={onChange} name="send_file" value={state.send_file}/>
-          <p>Enter your iv:</p>
+          <p>Enter your sign:</p>
           <input type='text' onChange={onChange} name="sign_file" value={state.sign_file}/>
           <br></br>
           <input type='submit' />
