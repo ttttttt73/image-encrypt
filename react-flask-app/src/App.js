@@ -49,6 +49,7 @@ function App() {
     }
   }, []);
 
+  
   const retrieveFile = async () => {
     const { accounts, contract } = ethcontract;
     console.log("Contract's get call: ", await contract.methods.get().call())
@@ -89,6 +90,8 @@ function App() {
       setBuffer(reader.result);
     };
     reader.readAsDataURL(file)
+
+
   }
 
   const onSubmit_decrypt = async (event) => {
@@ -140,16 +143,8 @@ function App() {
         <button onClick={retrieveFile}>
           Contract get call
         </button>
-        <form onSubmit={onSubmit_decrypt}>
-          <h2>Decrytion</h2>
-          <p>Enter your content:</p>
-          <input type='text' onChange={onChange} name="send_file" value={state.send_file}/>
-          <p>Enter your sign:</p>
-          <input type='text' onChange={onChange} name="sign_file" value={state.sign_file}/>
-          <br></br>
-          <input type='submit' />
-        </form>
-        <PostRequestDecryptHooks state={state}/>
+        <h2>Decrytion</h2>
+        <PostRequestDecryptHooks block_sign={block_sign} block_content={block_content}/>
       </header>
     </div>
   );

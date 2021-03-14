@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 function PostRequestDecryptHooks(props) {
-    const [Plaintext, setPlaintext] = useState(null);
+    const [Imagebuffer, setImagebuffer] = useState(null);
 
     useEffect(() => {
-        if (props.state.send_file.trim() !== "" && props.state.sign_file.trim() !== ""){
+        console.log(props.block_sign, typeof(props.block_sign))
+        console.log(props.block_content, typeof(props.block_content))
+        if (props.block_sign != null && props.block_content != null){
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({send_file: props.state.send_file, sign_file: props.state.sign_file })
+                body: JSON.stringify({send_file: props.block_sign, sign_file: props.block_content })
             };
-            fetch('/decrypt2', requestOptions).then(res => res.json()).then(data => { setPlaintext(data.pt)});
+            fetch('/decrypt2', requestOptions).then(res => res.json()).then(data => { setImagebuffer(data.pt) });
         }
-    }, [props.state]);
+    }, [props.block_content, props.block_sign]);
 
     return (
         <div className="card text-cetner m-3">
             <h5 className="card-header">Post Request Result - Decryption</h5>
-            <img src={Plaintext} alt="decrypt output"/>
+            <img src={Imagebuffer} alt="decrypt output"/>
         </div>
     );
 }

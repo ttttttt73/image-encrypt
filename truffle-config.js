@@ -6,7 +6,8 @@ module.exports = {
   contracts_build_directory: path.join(__dirname, "react-flask-app/src/contracts"),
   networks: {
     develop: {
-      port: 9545
+      port: 9545,
+      gas: 47000000
     }
   }
 };

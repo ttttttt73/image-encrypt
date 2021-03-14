@@ -31,6 +31,8 @@ def verify(input_file, sign_file):
     ### get hash of enList and change a type same as a signf
     se = str(enList)
     cEnList = okKey.getHash(se.encode())
+    print(type(sign_file))
+    print(sign_file, '\n', input_file, '\n', str(cEnList))
     assert sign_file == str(cEnList)
 
     return enList
@@ -64,6 +66,8 @@ def getIPFS_hash(deList):
 
 
 def decrypt2(send_res, sign_res):
+    print(send_res)
+    print(sign_res)
     input_file = c.cat(send_res)
     sign_file = c.cat(sign_res)
     # bytes -> str : b'[b\'\\x88\\x08\... -> [b'\x88\x08\...

@@ -14,6 +14,10 @@ function PostRequestEncryptHooks(props) {
             body: JSON.stringify({ msg: props.msg })
         };
         if (props.msg !== null) {
+            setKey(null);
+            setIV(null);
+            setCiphertext(null);
+            setCiphertext2(null);
             fetch('/encrypt2', requestOptions).then(res => res.json()).then(
                 data => {
                     setKey(data.send_res);
