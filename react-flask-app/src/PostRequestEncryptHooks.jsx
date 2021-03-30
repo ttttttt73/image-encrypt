@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import configData from "./conf.json";
+
 
 function PostRequestEncryptHooks(props) {
     const [Key, setKey] = useState(null);
@@ -18,7 +20,7 @@ function PostRequestEncryptHooks(props) {
             setIV(null);
             setCiphertext(null);
             setCiphertext2(null);
-            fetch('/encrypt2', requestOptions).then(res => res.json()).then(
+            fetch('http://' + configData.FLASK_HOST + ':' + configData.FLASK_PORT + '/encrypt2', requestOptions).then(res => res.json()).then(
                 data => {
                     setKey(data.send_res);
                     setIV(data.sign_res);

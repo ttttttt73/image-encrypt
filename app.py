@@ -9,6 +9,11 @@ from flask_cors import CORS
 import json
 import requests
 import ipfshttpclient
+
+
+with open("react-flask-app/src/conf.json", "r") as j:
+    cfg = json.load(j)
+
 # api = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001/http')
 # client = ipfshttpclient.connect('/dns/ipfs/infura.io/tcp/5001/https')
 
@@ -235,6 +240,6 @@ def decrypt2():
     return { 'pt': output_buffer }
 
 
-'''if __name__ == "__main__":
+if __name__ == "__main__":
     # INS = contract.deploy()
-    app.run(host='0.0.0.0')'''
+    app.run(host=cfg['FLASK_HOST'], port=cfg['FLASK_PORT'])

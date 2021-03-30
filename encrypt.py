@@ -8,7 +8,11 @@ def encrypt2(msg):
     import base64
     import sys
     from base64 import b32encode, b16encode
+    import json
 
+    
+    with open("react-flask-app/src/conf.json", "r") as j:
+        cfg = json.load(j)
 
     msg_bytes = msg.encode()
     # change string to byte and split into two bytearray
@@ -45,11 +49,12 @@ def encrypt2(msg):
     try:
         import ipfshttpclient
         
-        c = ipfshttpclient.connect('/dns/ipfs.infura.io/tcp/5001/https')
+        c = ipfshttpclient.connect(cfg['IPFS_HOST'])
         if c == None:
             Exception("There is a problem when getting hash values")
-    except:
+    except Exception as e:
         print("An exception occurred when connecting IPFS[getIPFS_hash]")
+        print('Error: ', e)
         sys.exit(1)
 
     # 2개 cid

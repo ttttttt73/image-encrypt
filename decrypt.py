@@ -10,11 +10,16 @@ import time
 import argparse
 import csv
 import sys
+import json
+
+
+with open("react-flask-app/src/conf.json", "r") as j:
+    cfg = json.load(j)
 
 try:
     import ipfshttpclient
     
-    c = ipfshttpclient.connect('/dns/ipfs.infura.io/tcp/5001/https')
+    c = ipfshttpclient.connect(cfg['IPFS_HOST'])
     if c == None:
         Exception("There is a problem when getting hash values")
 except:

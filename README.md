@@ -23,7 +23,7 @@ git clone https://github.com/ttttttt73/image-encrypt-dapp.git
 ```
 ```
 pip install -r requirements.txt  
-flask run  
+python app.py  
 ```
 ```
 truffle develop  
@@ -35,3 +35,5 @@ cd react-flask-app
 npm install  
 npm start  
 ```
+# Configuration
+react-flask-app/src/conf.json
