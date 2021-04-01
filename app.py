@@ -240,6 +240,6 @@ def decrypt2():
     return { 'pt': output_buffer }
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # INS = contract.deploy()
-    app.run(host=cfg['FLASK_HOST'], port=cfg['FLASK_PORT'])
+    # app.run(host=cfg['FLASK_HOST'], port=cfg['FLASK_PORT'])

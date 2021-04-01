@@ -14,7 +14,7 @@ function PostRequestDecryptHooks(props) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({send_file: props.block_sign, sign_file: props.block_content })
             };
-            fetch('http://' + configData.FLASK_HOST + ':' + configData.FLASK_PORT + '/decrypt2', requestOptions).then(res => res.json()).then(data => { setImagebuffer(data.pt) });
+            fetch('/decrypt2', requestOptions).then(res => res.json()).then(data => { setImagebuffer(data.pt) });
         }
     }, [props.block_content, props.block_sign]);
 
