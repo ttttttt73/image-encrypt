@@ -22,7 +22,7 @@ CORS(app)
 def index():
     return render_template('index.html')
 
-
+'''
 @app.route('/encrypt', methods=['POST'])
 def encrypt():
     from base64 import b64encode
@@ -58,21 +58,16 @@ def decrypt():
         key = b64decode(b64['key'])
         iv = b64decode(b64['iv'])
         ct = b64decode(b64['ciphertext'])
-        print(iv)
-        print(ct)
         
         cipher = AES.new(key, AES.MODE_CBC, iv)
-        print(f"size of block = {AES.block_size}")
         pt = unpad(cipher.decrypt(ct), AES.block_size)
-        print("The message was: ", pt)
         pt = pt.decode('utf-8')
         iv = b64encode(iv).decode('utf-8')
-        print(type(iv), type(pt))
         return {'iv': iv, 'pt': pt}
     except ValueError as e:
         print("Incorrect decryption: ", e)
     except KeyError as e:
-        print("Incorrect decryption: ", e)
+        print("Incorrect decryption: ", e)'''
 
 
 @app.route('/encrypt2', methods=['POST'])
